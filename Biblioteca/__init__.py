@@ -29,7 +29,7 @@ class Interfaz:
         button_libros.place(x = 95,y = 250,width= 100, height  = 40)
 
 
-        button_usuarios = Button(p_Frame, text="Usuarios",font=("Modern", 16), foreground = "white", highlightthickness=2)
+        button_usuarios = Button(p_Frame, text="Usuarios", command=self.ventana_Usuarios,font=("Modern", 16), foreground = "white", highlightthickness=2)
         button_usuarios.pack()
         button_usuarios.config(bg = "black")
         button_usuarios.place(x = 195,y = 250, width= 100, height  = 40 )
@@ -130,6 +130,55 @@ class Interfaz:
         button_regresar.place(x=370, y=265, width=110, height=20)
 
         self.ventana_libros.mainloop()
+
+    def ventana_Usuarios(self):
+
+        self.ventana_principal.iconify()
+        self.ventana_usuarios = tk.Toplevel()
+        self.ventana_usuarios.title("Gestionando Libros")
+        self.ventana_usuarios.geometry("%dx%d+%d+%d" % (500, 300, 450, 220))
+        self.ventana_usuarios.resizable(0, 0)
+
+        usuarios_Frame = Frame(self.ventana_usuarios)
+        usuarios_Frame.pack(side="top")
+        usuarios_Frame.place(width="500", height="300")
+        usuarios_Frame.config(bg="black")
+
+        label_nombre = Label(usuarios_Frame, text="Titulo del Libro", font=("Modern", 12), foreground="white")
+        label_nombre.pack()
+        label_nombre.config(bg="black")
+        label_nombre.place(x=20, y=40, width=200, height=20)
+
+        entrada_nombre = tk.Entry(usuarios_Frame)
+        entrada_nombre.pack()
+        entrada_nombre.place(x = 200, y = 40, width = 160, height = 20)
+
+        label_autor = Label(usuarios_Frame, text="Nombre del Autor", font=("Modern", 12), foreground="white")
+        label_autor.pack()
+        label_autor.config(bg="black")
+        label_autor.place(x=20, y=70, width=200, height=20)
+
+        entrada_autor = tk.Entry(usuarios_Frame)
+        entrada_autor.pack()
+        entrada_autor.place(x= 200, y=70, width=160, height=20)
+
+        label_isbn = Label(usuarios_Frame, text="Ingrese el ISBN del libro", font=("Modern", 12), foreground="white")
+        label_isbn.pack()
+        label_isbn.config(bg="black")
+        label_isbn.place(x=20, y=100, width=200, height=20)
+
+        entrada_isbn = tk.Entry(usuarios_Frame)
+        entrada_isbn.pack()
+        entrada_isbn.place(x=200, y=100, width=160, height=20)
+
+        button_guardar = Button(usuarios_Frame, text="Guardar Libro", font=("Modern", 12), foreground="white",highlightthickness=2)
+        button_guardar.pack()
+        button_guardar.config(bg="black")
+        button_guardar.place(x=370, y=100, width=110, height=20)
+
+
+        self.ventana_usuarios.mainloop()
+
 
 
     def regresar(self):

@@ -4,6 +4,11 @@ from tkinter import Frame
 from tkinter import Button, filedialog,Label
 
 class Libros:
+
+    def guardar_libro():
+        pass
+
+    # Estructura y componentes de la ventana de libros
     def ventana_Libros(self):
 
         self.ventana_principal.iconify()

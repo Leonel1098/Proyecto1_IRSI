@@ -1,17 +1,22 @@
+#Importaciones de las librerias
 from tkinter import Tk
 import tkinter as tk
 from tkinter import Frame
 from tkinter import Button, filedialog,Label
+
+#Importando las otras clases 
 from Libros import Libros
 from Usuarios import Usuarios
 from Morosidad import Morosidad
 from Prestamos import Prestamos
 
 class Interfaz:
+    #Varibles que contienen los metodos de las ventanas de las otras clases
     ventana_prestamos = Prestamos.ventana_Prestamo
     ventana_morosidad = Morosidad.ventana_Morosidad
     ventana_usuarios = Usuarios.ventana_Usuarios
     ventana_libros = Libros.ventana_Libros
+
     #Estructura y componentes de la Ventana principal del Programa
     def ventana_Principal(self,root):
         self.ventana_principal = root
@@ -45,24 +50,16 @@ class Interfaz:
         button_prestamo.config(bg = "black")
         button_prestamo.place(x =295,y= 250, width= 100, height  = 40)
 
-        button_utilidades = Button(p_Frame, text="Utilidades",font=("Modern", 16), foreground = "white", highlightthickness=2)
+        button_utilidades = Button(p_Frame, text="Abrir Archivo",font=("Modern", 16), foreground = "white", highlightthickness=2)
         button_utilidades.pack()
         button_utilidades.config(bg = "black")
-        button_utilidades.place(x =395, y = 250, width= 100, height  = 40)
+        button_utilidades.place(x =395, y = 250, width= 120, height  = 40)
 
         button_morosidad = Button(p_Frame, text="Morosidad", command= self.ventana_morosidad,font=("Modern", 16), foreground = "white", highlightthickness=2)
         button_morosidad.pack()
         button_morosidad.config(bg = "black")
-        button_morosidad.place(x =495, y = 250, width= 100, height  = 40)
+        button_morosidad.place(x =510, y = 250, width= 100, height  = 40)
         self.ventana_principal.mainloop()
-
-    # Estructura y componentes de la ventana de libros
-    
-
-
-    
-
-    
 
     def regresar(self,ventana):
         

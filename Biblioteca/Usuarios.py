@@ -4,6 +4,7 @@ from tkinter import Frame
 from tkinter import Button, filedialog,Label
 
 class Usuarios:
+    # Estructura y componentes de la ventana de Usuarios
     def ventana_Usuarios(self):
 
         self.ventana_principal.iconify()

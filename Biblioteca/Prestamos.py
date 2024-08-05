@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import Frame
 from tkinter import Button, filedialog,Label
 class Prestamos:
+    # Estructura y componentes de la ventana de Prestamos
     def ventana_Prestamo(self):
         self.ventana_principal.iconify()
         self.ventana_prestamos = tk.Toplevel()

@@ -4,6 +4,7 @@ from tkinter import Frame
 from tkinter import Button, filedialog,Label
 
 class Morosidad:
+    # Estructura y componentes de la ventana de Morosidad
     def ventana_Morosidad(self):
         self.ventana_principal.iconify()
         self.ventana_morosidad = tk.Toplevel()

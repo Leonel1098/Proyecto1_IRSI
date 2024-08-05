@@ -1,53 +1,88 @@
-from tkinter import Tk, ttk
-from tkinter import * 
-from tkinter import filedialog
+from tkinter import Tk
+import tkinter as tk
+from tkinter import Frame
+from tkinter import Button, filedialog,Label
 
+class Libros:
+    def ventana_Libros(self):
 
-ventana = Tk()
-ventana.title("PROYECTO")
-ventana.geometry("%dx%d+%d+%d" % (900,500,350,100))
-ventana.resizable(0,0)
+        self.ventana_principal.iconify()
+        self.ventana_libros = tk.Toplevel()
+        self.ventana_libros.title("Gestionando Libros")
+        self.ventana_libros.geometry("%dx%d+%d+%d" % (500, 300, 450, 220))
+        self.ventana_libros.resizable(0, 0)
 
-panel_Frame = Frame(ventana)
-panel_Frame.pack(side = "top")
-panel_Frame.place(width = "900", height = "500")
-panel_Frame.config(background = "gray")
+        libros_Frame = Frame(self.ventana_libros)
+        libros_Frame.pack(side="top")
+        libros_Frame.place(width="500", height="300")
+        libros_Frame.config(bg="black")
 
+        label_nombre = Label(libros_Frame, text="Titulo del Libro", font=("Modern", 12), foreground="white")
+        label_nombre.pack()
+        label_nombre.config(bg="black")
+        label_nombre.place(x=20, y=40, width=200, height=20)
 
-textfield = Text(panel_Frame)
-textfield.pack()
-textfield.place(x= "165", y = "20",width = "720", height = "470")
-scrollbar = Scrollbar(ventana, command = textfield.yview)
-scrollbar.pack()
-scrollbar.place(x = "880", y = "20", width = "20", height = "470")
-textfield.config(yscrollcommand = scrollbar)
+        entrada_nombre = tk.Entry(libros_Frame)
+        entrada_nombre.pack()
+        entrada_nombre.place(x = 200, y = 40, width = 160, height = 20)
 
+        label_autor = Label(libros_Frame, text="Nombre del Autor", font=("Modern", 12), foreground="white")
+        label_autor.pack()
+        label_autor.config(bg="black")
+        label_autor.place(x=20, y=70, width=200, height=20)
 
-button = Button(panel_Frame, text="Cargar",  foreground = "white")
-button.pack()
-button.config(bg = "black")
-button.place(x = 10,y = 20,width= 150, height  = 40)
+        entrada_autor = tk.Entry(libros_Frame)
+        entrada_autor.pack()
+        entrada_autor.place(x= 200, y=70, width=160, height=20)
 
-button = Button(panel_Frame, text="Analizar",  foreground = "white")
-button.pack()
-button.config(bg = "black")
-button.place(x = 10,y = 65,width= 150, height  = 40)
+        label_isbn = Label(libros_Frame, text="Ingrese el ISBN del libro", font=("Modern", 12), foreground="white")
+        label_isbn.pack()
+        label_isbn.config(bg="black")
+        label_isbn.place(x=20, y=100, width=200, height=20)
 
-combo = ttk.Combobox (panel_Frame, values = ["Reporte de Tokens","Reporte de Errores","Manual de Usuario","Manual Técnico"])
-combo.pack()
-combo.config(background = "black")
-combo.current(0)
-combo.place(x=10, y = 115, width = "150", height = "40")
+        entrada_isbn = tk.Entry(libros_Frame)
+        entrada_isbn.pack()
+        entrada_isbn.place(x=200, y=100, width=160, height=20)
 
-buttonabrir = Button(panel_Frame, text="Seleccionar Reporte", foreground = "white")
-buttonabrir.pack()
-buttonabrir.config(bg = "black")
-buttonabrir.place(x= 10, y=160, width = "150", height = "40")
+        button_guardar = Button(libros_Frame, text="Guardar Libro", font=("Modern", 12), foreground="white",highlightthickness=2)
+        button_guardar.pack()
+        button_guardar.config(bg="black")
+        button_guardar.place(x=370, y=100, width=110, height=20)
 
+        label_eliminar = Label(libros_Frame, text="Ingrese el ISBN", font=("Modern", 12), foreground="white")
+        label_eliminar.pack()
+        label_eliminar.config(bg="black")
+        label_eliminar.place(x=20, y=180, width=200, height=20)
 
+        entrada_eliminar = tk.Entry(libros_Frame)
+        entrada_eliminar.pack()
+        entrada_eliminar.place(x=200, y=180, width=160, height=20)
 
-ventana.mainloop()
+        button_eliminar = Button(libros_Frame, text="Eliminar Libro", font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_eliminar.pack()
+        button_eliminar.config(bg="black")
+        button_eliminar.place(x=370, y=180, width=110, height=20)
 
+        label_buscar = Label(libros_Frame, text="Ingrese el Título", font=("Modern", 12), foreground="white")
+        label_buscar.pack()
+        label_buscar.config(bg="black")
+        label_buscar.place(x=20, y=220, width=200, height=20)
+
+        entrada_buscar = tk.Entry(libros_Frame)
+        entrada_buscar.pack()
+        entrada_buscar.place(x=200, y=220, width=160, height=20)
+
+        button_buscar = Button(libros_Frame, text="Buscar Libro", font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_buscar.pack()
+        button_buscar.config(bg="black")
+        button_buscar.place(x=370, y=220, width=110, height=20)
+
+        button_regresar = Button(libros_Frame, text="Regresar", command= lambda: self.regresar(self.ventana_libros), font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_regresar.pack()
+        button_regresar.config(bg="black")
+        button_regresar.place(x=370, y=265, width=110, height=20)
+
+        self.ventana_libros.mainloop()
 
 
 

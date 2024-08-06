@@ -1,12 +1,17 @@
 from tkinter import Tk
 import tkinter as tk
 from tkinter import Frame
-from tkinter import Button, filedialog,Label
+from tkinter import Button, filedialog,Label,Entry
 
 class Libros:
 
-    def guardar_libro():
-        pass
+    def guardar_libros(self):
+        titulo = self.entrada_nombre.get()
+        autor = self.entrada_autor.get()
+        isbn = self.entrada_isbn.get()
+
+        print(titulo,autor,isbn)
+    
 
     # Estructura y componentes de la ventana de libros
     def ventana_Libros(self):
@@ -49,7 +54,7 @@ class Libros:
         entrada_isbn.pack()
         entrada_isbn.place(x=200, y=100, width=160, height=20)
 
-        button_guardar = Button(libros_Frame, text="Guardar Libro", font=("Modern", 12), foreground="white",highlightthickness=2)
+        button_guardar = Button(libros_Frame, text="Guardar Libro", command= self.guardar_libros, font=("Modern", 12), foreground="white", highlightthickness=2)
         button_guardar.pack()
         button_guardar.config(bg="black")
         button_guardar.place(x=370, y=100, width=110, height=20)
@@ -91,6 +96,7 @@ class Libros:
 
 
 
+    
 
 
 

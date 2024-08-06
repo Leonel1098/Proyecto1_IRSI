@@ -10,8 +10,10 @@ from Usuarios import Usuarios
 from Morosidad import Morosidad
 from Prestamos import Prestamos
 
+
 class Interfaz:
     #Varibles que contienen los metodos de las ventanas de las otras clases
+    guardar_libros = Libros.guardar_libros
     ventana_prestamos = Prestamos.ventana_Prestamo
     ventana_morosidad = Morosidad.ventana_Morosidad
     ventana_usuarios = Usuarios.ventana_Usuarios

@@ -5,7 +5,7 @@ from tkinter import Frame
 from tkinter import Button, filedialog,Label
 
 #Importando las otras clases 
-from Libros import Libros
+from Libros import Libros 
 from Usuarios import Usuarios
 from Morosidad import Morosidad
 from Prestamos import Prestamos
@@ -13,11 +13,12 @@ from Prestamos import Prestamos
 
 class Interfaz:
     #Varibles que contienen los metodos de las ventanas de las otras clases
+    ventana_libros = Libros.ventana_Libros
     guardar_libros = Libros.guardar_libros
     ventana_prestamos = Prestamos.ventana_Prestamo
     ventana_morosidad = Morosidad.ventana_Morosidad
     ventana_usuarios = Usuarios.ventana_Usuarios
-    ventana_libros = Libros.ventana_Libros
+    
 
     #Estructura y componentes de la Ventana principal del Programa
     def ventana_Principal(self,root):

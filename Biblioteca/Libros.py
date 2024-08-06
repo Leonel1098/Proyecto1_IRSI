@@ -4,13 +4,24 @@ from tkinter import Frame
 from tkinter import Button, filedialog,Label,Entry
 
 class Libros:
-
+    global entrada_nombre 
+    global entrada_autor 
+    global entrada_isbn 
+    global libros_dic 
     def guardar_libros(self):
-        titulo = self.entrada_nombre.get()
-        autor = self.entrada_autor.get()
-        isbn = self.entrada_isbn.get()
+        global entrada_nombre
+        global entrada_autor
+        global entrada_isbn
+        global libros_dic
+        titulo = entrada_nombre.get()
+        autor = entrada_autor.get()
+        isbn = entrada_isbn.get()
 
-        print(titulo,autor,isbn)
+        libros_dic={"Titulo": titulo,"Autor":autor,"Codigo":isbn}
+
+        print(libros_dic)
+        
+        
     
 
     # Estructura y componentes de la ventana de libros
@@ -31,8 +42,9 @@ class Libros:
         label_nombre.pack()
         label_nombre.config(bg="black")
         label_nombre.place(x=20, y=40, width=200, height=20)
+        global entrada_nombre
+        entrada_nombre= tk.Entry(libros_Frame)   
 
-        entrada_nombre = tk.Entry(libros_Frame)
         entrada_nombre.pack()
         entrada_nombre.place(x = 200, y = 40, width = 160, height = 20)
 
@@ -41,6 +53,7 @@ class Libros:
         label_autor.config(bg="black")
         label_autor.place(x=20, y=70, width=200, height=20)
 
+        global entrada_autor
         entrada_autor = tk.Entry(libros_Frame)
         entrada_autor.pack()
         entrada_autor.place(x= 200, y=70, width=160, height=20)
@@ -50,6 +63,7 @@ class Libros:
         label_isbn.config(bg="black")
         label_isbn.place(x=20, y=100, width=200, height=20)
 
+        global entrada_isbn
         entrada_isbn = tk.Entry(libros_Frame)
         entrada_isbn.pack()
         entrada_isbn.place(x=200, y=100, width=160, height=20)

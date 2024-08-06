@@ -1,25 +1,42 @@
-from tkinter import Tk
+from tkinter import END, Tk, ttk
 import tkinter as tk
 from tkinter import Frame
-from tkinter import Button, filedialog,Label,Entry
+from tkinter import Button, filedialog,Label,Entry,messagebox
 
 class Libros:
     global entrada_nombre 
     global entrada_autor 
     global entrada_isbn 
     global libros_dic 
+    libros_dic = {}
+
+    
+        
+
     def guardar_libros(self):
         global entrada_nombre
         global entrada_autor
         global entrada_isbn
         global libros_dic
+
+        isbn = entrada_isbn.get()
+        if isbn in libros_dic:
+            print("El ISBN ya existe en la biblioteca.")
         titulo = entrada_nombre.get()
         autor = entrada_autor.get()
-        isbn = entrada_isbn.get()
+        
+        libros_dic[isbn] = { 'titulo': titulo, "autor" : autor}
 
-        libros_dic={"Titulo": titulo,"Autor":autor,"Codigo":isbn}
-
+        #Guarda Los libros en un archivo de texto
+        with open('biblioteca/libros.txt', 'a') as archivo:
+            archivo.write(f"Nombre del Libro: {titulo}, Autor: {autor}, Codigo ISBN: {isbn}\n")
+        messagebox.showinfo(title= "Guardar Libro",message= f"Libro '{titulo}' agregado exitosamente.")
         print(libros_dic)
+
+        #Limpia los cuadros de texto despues de guardar un libro
+        entrada_autor.delete(0, END)
+        entrada_isbn.delete(0, END)
+        entrada_nombre.delete(0, END)
         
         
     
@@ -73,28 +90,28 @@ class Libros:
         button_guardar.config(bg="black")
         button_guardar.place(x=370, y=100, width=110, height=20)
 
-        label_eliminar = Label(libros_Frame, text="Ingrese el ISBN", font=("Modern", 12), foreground="white")
+        label_eliminar = Label(libros_Frame, text="Seleccione el ISBN", font=("Modern", 12), foreground="white")
         label_eliminar.pack()
         label_eliminar.config(bg="black")
         label_eliminar.place(x=20, y=180, width=200, height=20)
 
-        entrada_eliminar = tk.Entry(libros_Frame)
-        entrada_eliminar.pack()
-        entrada_eliminar.place(x=200, y=180, width=160, height=20)
+        combobox_eliminar = ttk.Combobox(libros_Frame)
+        combobox_eliminar.pack()
+        combobox_eliminar.place(x=200, y=180, width=160, height=20)
 
         button_eliminar = Button(libros_Frame, text="Eliminar Libro", font=("Modern", 12), foreground="white", highlightthickness=2)
         button_eliminar.pack()
         button_eliminar.config(bg="black")
         button_eliminar.place(x=370, y=180, width=110, height=20)
 
-        label_buscar = Label(libros_Frame, text="Ingrese el Título", font=("Modern", 12), foreground="white")
+        label_buscar = Label(libros_Frame, text="Seleccione el Título", font=("Modern", 12), foreground="white")
         label_buscar.pack()
         label_buscar.config(bg="black")
         label_buscar.place(x=20, y=220, width=200, height=20)
 
-        entrada_buscar = tk.Entry(libros_Frame)
-        entrada_buscar.pack()
-        entrada_buscar.place(x=200, y=220, width=160, height=20)
+        combobox_buscar = ttk.Combobox(libros_Frame)
+        combobox_buscar.pack()
+        combobox_buscar.place(x=200, y=220, width=160, height=20)
 
         button_buscar = Button(libros_Frame, text="Buscar Libro", font=("Modern", 12), foreground="white", highlightthickness=2)
         button_buscar.pack()

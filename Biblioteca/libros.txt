@@ -1,0 +1,11 @@
+123,quijote,cervantes
+456,potter,rowlin
+Nombre del Libro: Don Quijote, Autor: Miguel de Cervantes, Codigo ISBN: 123
+Nombre del Libro: Azul, Autor: Miguel , Codigo ISBN: 123
+Nombre del Libro: Maiz, Autor: Asturias, Codigo ISBN: 654
+Nombre del Libro: Spiderman, Autor: Parker, Codigo ISBN: 693
+Nombre del Libro: Hulk, Autor: Marvel, Codigo ISBN: 987
+Nombre del Libro: Batman, Autor: DCcomics, Codigo ISBN: 256
+Nombre del Libro: Pato, Autor: Mario, Codigo ISBN: 475
+Nombre del Libro: Superman, Autor: Kent, Codigo ISBN: 325
+Nombre del Libro: Flash, Autor: Barry, Codigo ISBN: 479

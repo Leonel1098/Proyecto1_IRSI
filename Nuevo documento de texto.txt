@@ -1,0 +1,24 @@
+def guardar_libros(self):
+        global entrada_nombre
+        global entrada_autor
+        global entrada_isbn
+        global libros_dic
+
+        isbn = entrada_isbn.get()
+        if isbn in libros_dic:
+            print("El ISBN ya existe en la biblioteca.")
+        titulo = entrada_nombre.get()
+        autor = entrada_autor.get()
+        
+        libros_dic[isbn] = { 'titulo': titulo, "autor" : autor}
+
+        #Guarda Los libros en un archivo de texto
+        with open('biblioteca/libros.txt', 'a') as archivo:
+            archivo.write(f"Nombre del Libro: {titulo}, Autor: {autor}, Codigo ISBN: {isbn}\n")
+        messagebox.showinfo(title= "Guardar Libro",message= f"Libro '{titulo}' agregado exitosamente.")
+        print(libros_dic)
+
+        #Limpia los cuadros de texto despues de guardar un libro
+        entrada_autor.delete(0, END)
+        entrada_isbn.delete(0, END)
+        entrada_nombre.delete(0, END)

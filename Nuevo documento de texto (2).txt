@@ -1,0 +1,263 @@
+from tkinter import Tk
+import tkinter as tk
+from tkinter import Frame
+from tkinter import Button, filedialog,Label,Entry,messagebox,Listbox
+DATA_FILE = "Libros.txt"
+
+class Libros:
+    global entrada_nombre 
+    global entrada_autor 
+    global entrada_isbn 
+    global entrada_eliminar
+    libros_dic = {}
+        
+
+    def guardar_libros(self):
+        global entrada_nombre
+        global entrada_autor
+        global entrada_isbn
+        libros_dic = {}
+        try:
+            titulo = entrada_nombre.get()
+            autor = entrada_autor.get()
+            isbn = entrada_isbn.get()
+
+            if not titulo or not autor or not isbn:
+                messagebox.showwarning("Advertencia", "Todos los campos deben ser llenados.")
+                return
+
+            # Crea y/o abre el archivo contactos.txt de modo que haga un append
+            with open(DATA_FILE, "a") as file:
+                file.write(f"Titulo del Libro: {titulo}, Nombre del Autor: {autor}, Codigo ISBN: {isbn}\n")
+            messagebox.showinfo(title="Agregar Libro", message="Libro agregado exitosamente")
+            
+            #Limpia las entradas de texto
+            entrada_nombre.delete(0, tk.END)
+            entrada_autor.delete(0, tk.END)
+            entrada_isbn.delete(0, tk.END)
+            self.actualizar_listbox()
+
+        except FileNotFoundError:
+            messagebox.showerror(title="Error",message=f"Error: El archivo {file} no fue encontrado")
+
+        libros_dic={"Titulo": titulo,"Autor":autor,"Codigo":isbn}
+        print(libros_dic)
+        
+    def eliminar_libro(self):
+        self.libros_dic = {}
+        seleccionado = entrada_eliminar.curselection()
+        if not seleccionado:
+            messagebox.showwarning("Advertencia", "No has seleccionado ningún libro.")
+            return
+        
+        # Obtener el índice del elemento seleccionado
+        index = seleccionado[0]
+        isbn = entrada_eliminar.get(index).strip()
+
+        if isbn in self.libros_dic:
+            del self.libros_dic[isbn]
+            messagebox.showinfo("Éxito", f"El libro con el ISBN {isbn} ha sido eliminado.")
+            self.actualizar_listbox()  # Actualiza el Listbox después de eliminar un libro
+        else:
+            messagebox.showwarning("No encontrado", "No se encontró un libro con ese ISBN.")
+        
+        
+    
+    def actualizar_listbox(self):
+        self.libros_dic = {}
+        if entrada_eliminar:
+            entrada_eliminar.delete(0, tk.END)  # Limpiar el Listbox
+
+            for isbn in self.libros_dic:
+                entrada_eliminar.insert(tk.END, isbn)
+
+
+
+    """def cargar_libros(self):
+        self.libros_dic = {}
+        try:
+            with open(DATA_FILE, "r") as file:
+                for line in file:
+                    # Extraer información del libro desde la línea
+                    parts = line.strip().split(", ")
+                    if len(parts) == 3:
+                        titulo = parts[0].split(": ")[1]
+                        autor = parts[1].split(": ")[1]
+                        isbn = parts[2].split(": ")[1]
+                        self.libros_dic[isbn] = {"Titulo": titulo, "Autor": autor, "Codigo": isbn}
+        except FileNotFoundError:
+            messagebox.showerror(title="Error", message=f"El archivo {DATA_FILE} no fue encontrado.")
+
+    def guardar_libros(self):
+        titulo = self.entrada_nombre.get().strip()
+        autor = self.entrada_autor.get().strip()
+        isbn = self.entrada_isbn.get().strip()
+
+        if not titulo or not autor or not isbn:
+            messagebox.showwarning("Advertencia", "Todos los campos deben ser llenados.")
+            return
+
+        if isbn in self.libros_dic:
+            messagebox.showwarning("Advertencia", "El ISBN ya existe.")
+            return
+
+        self.libros_dic[isbn] = {"Titulo": titulo, "Autor": autor, "Codigo": isbn}
+        
+        with open(DATA_FILE, "a") as file:
+            file.write(f"Titulo del Libro: {titulo}, Nombre del Autor: {autor}, Codigo ISBN: {isbn}\n")
+        
+        messagebox.showinfo(title="Agregar Libro", message="Libro agregado exitosamente")
+        
+        # Limpia las entradas de texto
+        self.limpiar_campos()
+        self.actualizar_listbox()
+
+    def eliminar_libro(self):
+        seleccionado = self.listbox_isbn.curselection()
+        if not seleccionado:
+            messagebox.showwarning("Advertencia", "No has seleccionado ningún libro.")
+            return
+        
+        # Obtener el índice del elemento seleccionado
+        index = seleccionado[0]
+        isbn = self.listbox_isbn.get(index).strip()
+
+        if isbn in self.libros_dic:
+            del self.libros_dic[isbn]
+            messagebox.showinfo("Éxito", f"El libro con el ISBN {isbn} ha sido eliminado.")
+            self.actualizar_listbox()  # Actualiza el Listbox después de eliminar un libro
+            self.guardar_libros()  # Guarda los cambios en el archivo
+        else:
+            messagebox.showwarning("No encontrado", "No se encontró un libro con ese ISBN.")
+        
+        self.limpiar_campos()
+
+    def buscar_libro(self):
+        titulo_buscado = self.entrada_buscar.get().strip()
+
+        if not titulo_buscado:
+            messagebox.showwarning("Advertencia", "Ingrese el título del libro a buscar.")
+            return
+
+        encontrados = []
+        for libro in self.libros_dic.values():
+            if libro["Titulo"].strip() == titulo_buscado:
+                encontrados.append(f"{libro['Titulo']} por {libro['Autor']} (ISBN: {libro['Codigo']})")
+
+        if encontrados:
+            mensaje = '\n'.join(encontrados)
+            messagebox.showinfo("Resultado de la búsqueda", mensaje)
+        else:
+            messagebox.showwarning("No encontrado", "No se encontró ningún libro con ese título.")
+
+    def limpiar_campos(self):
+        self.entrada_nombre.delete(0, tk.END)
+        self.entrada_autor.delete(0, tk.END)
+        self.entrada_isbn.delete(0, tk.END)
+        self.entrada_buscar.delete(0, tk.END)
+
+    def actualizar_listbox(self):
+        if self.listbox_isbn:
+            self.listbox_isbn.delete(0, tk.END)  # Limpiar el Listbox
+
+            for isbn in self.libros_dic:
+                self.listbox_isbn.insert(tk.END, isbn)"""
+
+    # Estructura y componentes de la ventana de libros
+    def ventana_Libros(self):
+
+        self.ventana_principal.iconify()
+        self.ventana_libros = tk.Toplevel()
+        self.ventana_libros.title("Gestionando Libros")
+        self.ventana_libros.geometry("%dx%d+%d+%d" % (500, 300, 450, 220))
+        self.ventana_libros.resizable(0, 0)
+
+        libros_Frame = Frame(self.ventana_libros)
+        libros_Frame.pack(side="top")
+        libros_Frame.place(width="500", height="300")
+        libros_Frame.config(bg="black")
+
+        label_nombre = Label(libros_Frame, text="Titulo del Libro", font=("Modern", 12), foreground="white")
+        label_nombre.pack()
+        label_nombre.config(bg="black")
+        label_nombre.place(x=20, y=40, width=200, height=20)
+
+        global entrada_nombre
+        entrada_nombre= tk.Entry(libros_Frame)   
+        entrada_nombre.pack()
+        entrada_nombre.place(x = 200, y = 40, width = 160, height = 20)
+
+        label_autor = Label(libros_Frame, text="Nombre del Autor", font=("Modern", 12), foreground="white")
+        label_autor.pack()
+        label_autor.config(bg="black")
+        label_autor.place(x=20, y=70, width=200, height=20)
+
+        global entrada_autor
+        entrada_autor = tk.Entry(libros_Frame)
+        entrada_autor.pack()
+        entrada_autor.place(x= 200, y=70, width=160, height=20)
+
+        label_isbn = Label(libros_Frame, text="Ingrese el ISBN del libro", font=("Modern", 12), foreground="white")
+        label_isbn.pack()
+        label_isbn.config(bg="black")
+        label_isbn.place(x=20, y=100, width=200, height=20)
+
+        global entrada_isbn
+        entrada_isbn = tk.Entry(libros_Frame)
+        entrada_isbn.pack()
+        entrada_isbn.place(x=200, y=100, width=160, height=20)
+
+        button_guardar = Button(libros_Frame, text="Guardar Libro", command= self.guardar_libros, font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_guardar.pack()
+        button_guardar.config(bg="black")
+        button_guardar.place(x=370, y=100, width=110, height=20)
+
+        label_eliminar = Label(libros_Frame, text="Ingrese el ISBN", font=("Modern", 12), foreground="white")
+        label_eliminar.pack()
+        label_eliminar.config(bg="black")
+        label_eliminar.place(x=20, y=180, width=200, height=20)
+
+        global entrada_eliminar
+        entrada_eliminar = Listbox(libros_Frame)
+        entrada_eliminar.pack()
+        entrada_eliminar.place(x=200, y=180, width=160, height=20)
+        self.actualizar_listbox()
+
+
+        button_eliminar = Button(libros_Frame, text="Eliminar Libro",command= self.eliminar_libros, font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_eliminar.pack()
+        button_eliminar.config(bg="black")
+        button_eliminar.place(x=370, y=180, width=110, height=20)
+
+        label_buscar = Label(libros_Frame, text="Ingrese el Título", font=("Modern", 12), foreground="white")
+        label_buscar.pack()
+        label_buscar.config(bg="black")
+        label_buscar.place(x=20, y=220, width=200, height=20)
+
+        entrada_buscar = tk.Entry(libros_Frame)
+        entrada_buscar.pack()
+        entrada_buscar.place(x=200, y=220, width=160, height=20)
+
+        button_buscar = Button(libros_Frame, text="Buscar Libro", font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_buscar.pack()
+        button_buscar.config(bg="black")
+        button_buscar.place(x=370, y=220, width=110, height=20)
+
+        button_regresar = Button(libros_Frame, text="Regresar", command= lambda: self.regresar(self.ventana_libros), font=("Modern", 12), foreground="white", highlightthickness=2)
+        button_regresar.pack()
+        button_regresar.config(bg="black")
+        button_regresar.place(x=370, y=265, width=110, height=20)
+
+        self.ventana_libros.mainloop()
+        
+
+
+    
+
+
+
+
+    
+
+
+    
